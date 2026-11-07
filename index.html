@@ -237,7 +237,7 @@ const firebaseConfig={apiKey:'AIzaSyByNCKIDvOiuoeSnBFn6Z76ESGbjPcpnz4',authDomai
 const ADMINS=['sazidulkarim.26@gmail.com']; // শুধু এই Gmail-এ অ্যাডমিন প্যানেল দেখাবে
 
 const $=s=>document.querySelector(s),E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let S={name:'Brotherhood Sporting Club',logo:'',about:'',tiles:[],photos:[],members:[],gallery:[],events:[],jerseys:[],achievements:[],committee:[],bn:{},st:{views:0,signins:0}},D=null,adm=false,menu=false,iv,tt;
+let S=JSON.parse($('#st').textContent),D=null,adm=false,menu=false,iv,tt;
 try{const t=localStorage.getItem('th');if(t)document.documentElement.dataset.theme=t}catch(e){}
 const ss=v=>{try{v?sessionStorage.setItem('adm','1'):sessionStorage.removeItem('adm')}catch(e){}};
 const K='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
