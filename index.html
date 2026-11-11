@@ -261,18 +261,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .hn2 small::before{display:none}
 .hn2 small i{width:.45em}
 @media(max-width:420px){.hn2 small{font-size:9px}}
-/* ---- intro splash ---- */
-#splash{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 30%,#1f5560 0%,#14303b 48%,#0a1b22 100%);opacity:1;transition:opacity .6s ease,visibility .6s}
-#splash.out{opacity:0;visibility:hidden}
-.spw{width:min(94vw,560px);display:flex;flex-direction:column;align-items:center;gap:14px;animation:spin .5s ease both}
-@keyframes spin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.spw svg{width:100%;height:auto;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.spl{width:64px;height:64px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(224,102,58,.85)}
-.spt{color:#fff;font-weight:800;letter-spacing:.5px;font-size:18px;text-align:center}
-.spb{width:60%;height:5px;border-radius:3px;background:rgba(255,255,255,.15);overflow:hidden}
-.spb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ember),#c8962c);animation:spbar 4.1s linear forwards}
-@keyframes spbar{to{width:100%}}
-.sk{position:absolute;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:8px 16px;font:inherit;font-size:14px;cursor:pointer}
+/* ---- sign-in messages ---- */
+.er{color:#c0392b;font-size:14px;line-height:1.45;margin:10px 0 0;text-align:left}
+.er:empty{display:none}
+.wn{background:#fff3cd;color:#664d03;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45;margin:0 0 12px;text-align:left}
+/* ---- anti-save ---- */
+img{pointer-events:none;-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 @media(min-width:820px){
 .pg{grid-template-columns:repeat(6,1fr)}.gi{flex-basis:340px}.jg{grid-template-columns:repeat(4,1fr)}.ach>img{aspect-ratio:21/9}
 .stt{max-width:1120px;padding:0 24px 22px}
@@ -305,76 +299,10 @@ const firebaseConfig={apiKey:'AIzaSyByNCKIDvOiuoeSnBFn6Z76ESGbjPcpnz4',authDomai
 const ADMINS=['sazidulkarim.26@gmail.com','muzahidis676@gmail.com']; // শুধু এই Gmail-এ অ্যাডমিন প্যানেল দেখাবে
 
 const $=s=>document.querySelector(s),E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let S=JSON.parse($('#st').textContent),D=null,adm=false,menu=false,iv,tt;
+let S=JSON.parse($('#st').textContent),D=null,adm=false,usr=null,menu=false,iv,tt;
 try{const t=localStorage.getItem('th');if(t)document.documentElement.dataset.theme=t}catch(e){}
 const ss=v=>{try{v?sessionStorage.setItem('adm','1'):sessionStorage.removeItem('adm')}catch(e){}};
-const SPL=`<div class="spw"><img class="spl" src="${E(S.logo)}" alt=""><svg viewBox="0 0 400 250" role="img" aria-label="ক্রিকেট অ্যানিমেশন">
-<defs>
-<radialGradient id="spg1"><stop offset="0" stop-color="#fff3c4" stop-opacity=".9"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient>
-<linearGradient id="spg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d9a66"/><stop offset="1" stop-color="#1f6a45"/></linearGradient>
-<linearGradient id="spg0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1f27"/><stop offset="1" stop-color="#1b4a57"/></linearGradient>
-<pattern id="spg3" width="14" height="12" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="2.2" fill="#e0663a" opacity=".75"/><circle cx="10" cy="3" r="2.2" fill="#c8962c" opacity=".75"/><circle cx="7" cy="9" r="2.2" fill="#f1f5f2" opacity=".6"/></pattern>
-<pattern id="spg4" width="48" height="90" patternUnits="userSpaceOnUse"><rect width="24" height="90" fill="#fff" opacity=".06"/></pattern>
-</defs>
-<rect width="400" height="250" fill="url(#spg0)"/>
-<g fill="#fff" opacity=".7"><circle cx="120" cy="22" r="1.2"/><circle cx="170" cy="40" r="1"/><circle cx="230" cy="18" r="1.3"/><circle cx="285" cy="44" r="1"/><circle cx="205" cy="62" r="1"/><circle cx="95" cy="64" r="1"/><circle cx="318" cy="70" r="1.1"/></g>
-<circle cx="52" cy="28" r="52" fill="url(#spg1)"/><circle cx="348" cy="28" r="52" fill="url(#spg1)"/>
-<rect x="49" y="30" width="6" height="110" fill="#091a21"/><rect x="345" y="30" width="6" height="110" fill="#091a21"/>
-<rect x="36" y="18" width="32" height="14" rx="3" fill="#fff6d6"/><rect x="332" y="18" width="32" height="14" rx="3" fill="#fff6d6"/>
-<rect x="0" y="134" width="400" height="44" fill="#0c2a34"/><rect x="0" y="134" width="400" height="44" fill="url(#spg3)"/><rect x="0" y="174" width="400" height="4" fill="#091a21"/>
-<rect x="0" y="178" width="400" height="72" fill="url(#spg2)"/><rect x="0" y="178" width="400" height="72" fill="url(#spg4)"/>
-<rect x="34" y="196" width="332" height="18" rx="4" fill="#dcbd86"/><rect x="34" y="196" width="332" height="3" rx="1.5" fill="#c9a46c"/>
-<rect x="72" y="196" width="2" height="18" fill="#fff" opacity=".9"/><rect x="292" y="196" width="2" height="18" fill="#fff" opacity=".9"/>
-<rect x="44.7" y="172" width="2.6" height="34" rx="1.2" fill="#f7ead0" stroke="#cdb88c" stroke-width=".5"/><rect x="48.7" y="172" width="2.6" height="34" rx="1.2" fill="#f7ead0" stroke="#cdb88c" stroke-width=".5"/><rect x="52.7" y="172" width="2.6" height="34" rx="1.2" fill="#f7ead0" stroke="#cdb88c" stroke-width=".5"/>
-<rect x="45" y="169.8" width="5" height="2.2" rx="1" fill="#e9c98e"/><rect x="50" y="169.8" width="5" height="2.2" rx="1" fill="#e9c98e"/>
-<!-- bowler -->
-<g transform="translate(20 206)"><g>
-<animateTransform attributeName="transform" type="translate" values="0 0;86 0;96 0" keyTimes="0;.65;1" dur="2s" begin="0.5s" calcMode="spline" keySplines=".4 0 .6 1;.2 .6 .4 1" fill="freeze"/>
-<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.26s" begin="0.5s" repeatCount="5"/>
-<g><animateTransform attributeName="transform" type="rotate" values="0 0 -26;14 0 -26" keyTimes="0;1" dur="0.6s" begin="1.85s" calcMode="spline" keySplines=".3 0 .5 1" fill="freeze"/>
-<g><animateTransform attributeName="transform" type="rotate" values="26 0 -26;-30 0 -26;26 0 -26" dur="0.433s" begin="0.5s" repeatCount="3" fill="freeze"/><rect x="-4.5" y="-26" width="9" height="25" rx="4" fill="#f2f2f2"/><ellipse cx="2" cy="-1" rx="7" ry="3.2" fill="#14303b"/></g>
-<g><animateTransform attributeName="transform" type="rotate" values="-30 0 -26;26 0 -26;-30 0 -26" dur="0.433s" begin="0.5s" repeatCount="3" fill="freeze"/><rect x="-4.5" y="-26" width="9" height="25" rx="4" fill="#fff"/><ellipse cx="2" cy="-1" rx="7" ry="3.2" fill="#0e2229"/></g>
-<rect x="-9" y="-54" width="18" height="30" rx="8" fill="#3d7d78"/><rect x="-9" y="-41" width="18" height="4" fill="#e0663a"/>
-<g transform="translate(-3 -50)"><g><animateTransform attributeName="transform" type="rotate" values="-30 0 0;30 0 0;-30 0 0" dur="0.433s" begin="0.5s" repeatCount="3" fill="freeze"/><rect x="-3.2" y="0" width="6.4" height="20" rx="3.2" fill="#f2c9a0"/><rect x="-3.7" y="0" width="7.4" height="9" rx="3.5" fill="#3d7d78"/></g></g>
-<circle cx="1" cy="-65" r="11" fill="#f2c9a0"/><path d="M-10 -67a11 11 0 0 1 22 0z" fill="#14303b"/><rect x="5" y="-70.5" width="11" height="3.2" rx="1.6" fill="#14303b"/>
-<circle cx="6" cy="-64" r="1.9" fill="#14303b"/><path d="M3.5 -59q3 3 6.5 0" stroke="#7a3b2e" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-<g transform="translate(3 -50)"><g><animateTransform attributeName="transform" type="rotate" values="-25 0 0;335 0 0" dur="0.7s" begin="1.45s" fill="freeze"/><rect x="-3.5" y="0" width="7" height="23" rx="3.5" fill="#f2c9a0"/><rect x="-4.0" y="0" width="8" height="9" rx="3.5" fill="#3d7d78"/><circle cx="0" cy="24" r="4.2" fill="#f2c9a0"/><circle cx="0" cy="27" r="3.6" fill="#d6362f"><set attributeName="opacity" to="0" begin="1.955s" fill="freeze"/></circle></g></g>
-</g></g></g></g>
-<!-- batsman -->
-<g transform="translate(300 206)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="0.35s" begin="2.725s"/>
-<g><rect x="-11" y="-27" width="9" height="26" rx="4" fill="#f6f6f6"/><rect x="-11" y="-17" width="9" height="2" fill="#14303b"/><ellipse cx="-9" cy="-1" rx="7" ry="3.2" fill="#14303b"/></g>
-<g><rect x="2" y="-27" width="9" height="26" rx="4" fill="#ececec"/><rect x="2" y="-17" width="9" height="2" fill="#14303b"/><ellipse cx="2" cy="-1" rx="7" ry="3.2" fill="#0e2229"/></g>
-<rect x="-9" y="-54" width="18" height="30" rx="8" fill="#e0663a"/><rect x="-9" y="-41" width="18" height="4" fill="#fff" opacity=".9"/>
-<path d="M-3 -49 L-9 -37" stroke="#e0663a" stroke-width="6.5" stroke-linecap="round"/>
-<g transform="translate(-9 -36)"><g><animateTransform attributeName="transform" type="rotate" values="0 0 0;-150 0 0;105 0 0;105 0 0;175 0 0" keyTimes="0;.25;.583;.833;1" dur="1.2s" begin="1.9s" fill="freeze"/>
-<rect x="-1.6" y="-9" width="3.2" height="11" rx="1.4" fill="#2a2a2a"/><rect x="-3.4" y="1" width="7" height="31" rx="3" fill="#e8c88c" stroke="#c9a46c" stroke-width="1"/></g></g>
-<circle cx="-9" cy="-36" r="4.2" fill="#f6f6f6"/>
-<g><animateTransform attributeName="transform" type="rotate" values="0 0 -54;-12 0 -54;9 0 -54;-6 0 -54;0 0 -54" keyTimes="0;.25;.55;.8;1" dur="0.7s" begin="2.785s"/>
-<circle cx="-1" cy="-65" r="11" fill="#f2c9a0"/><path d="M-12 -67a12 12 0 0 1 24 0v3h-24z" fill="#14303b"/><rect x="-18" y="-70.5" width="11" height="3.4" rx="1.7" fill="#14303b"/>
-<path d="M-11 -62h-6M-11 -58h-6M-11 -54h-5" stroke="#aebfc6" stroke-width="1.2" stroke-linecap="round"/>
-<circle cx="-6" cy="-65" r="2.6" fill="#fff"><animate attributeName="r" values="2.6;3.9" dur="0.1s" begin="2.745s" fill="freeze"/></circle><circle cx="-6.8" cy="-65" r="1.3" fill="#14303b"/>
-<path d="M-8.5 -59q3 2.6 6.5 0" stroke="#7a3b2e" stroke-width="1.4" fill="none" stroke-linecap="round"><set attributeName="opacity" to="0" begin="2.745s" fill="freeze"/></path>
-<ellipse cx="-5.5" cy="-58.5" rx="2.2" ry="3" fill="#7a3b2e" opacity="0"><set attributeName="opacity" to="1" begin="2.745s" fill="freeze"/></ellipse></g>
-</g></g>
-<!-- batsman-end stumps -->
-<g><animateTransform attributeName="transform" type="translate" values="0 0;-34 -28;-58 10" keyTimes="0;.45;1" dur="0.6s" begin="2.705s" fill="freeze"/><g><animateTransform attributeName="transform" type="rotate" values="0 322 189;-85 322 189" dur="0.6s" begin="2.705s" fill="freeze"/><rect x="320.7" y="172" width="2.6" height="34" rx="1.2" fill="#f7ead0" stroke="#cdb88c" stroke-width=".5"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;24 -28;41 10" keyTimes="0;.45;1" dur="0.6s" begin="2.705s" fill="freeze"/><g><animateTransform attributeName="transform" type="rotate" values="0 326 189;100 326 189" dur="0.6s" begin="2.705s" fill="freeze"/><rect x="324.7" y="172" width="2.6" height="34" rx="1.2" fill="#f7ead0" stroke="#cdb88c" stroke-width=".5"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;40 -28;68 10" keyTimes="0;.45;1" dur="0.6s" begin="2.705s" fill="freeze"/><g><animateTransform attributeName="transform" type="rotate" values="0 330 189;70 330 189" dur="0.6s" begin="2.705s" fill="freeze"/><rect x="328.7" y="172" width="2.6" height="34" rx="1.2" fill="#f7ead0" stroke="#cdb88c" stroke-width=".5"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;-18 -40;-36 34" keyTimes="0;.45;1" dur="0.7s" begin="2.705s" fill="freeze"/><g><animateTransform attributeName="transform" type="rotate" values="0 323.5 171;-300 323.5 171" dur="0.7s" begin="2.705s" fill="freeze"/><rect x="321" y="169.8" width="5" height="2.2" rx="1" fill="#e9c98e"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;16 -40;32 34" keyTimes="0;.45;1" dur="0.7s" begin="2.705s" fill="freeze"/><g><animateTransform attributeName="transform" type="rotate" values="0 328.5 171;320 328.5 171" dur="0.7s" begin="2.705s" fill="freeze"/><rect x="326" y="169.8" width="5" height="2.2" rx="1" fill="#e9c98e"/></g></g>
-<!-- impact star -->
-<g transform="translate(321 185)"><g><animateTransform attributeName="transform" type="scale" values="0.1;1.3;1" keyTimes="0;.4;1" dur="0.4s" begin="2.705s" fill="freeze"/><polygon points="0.0,-16.0 2.7,-6.5 11.3,-11.3 6.5,-2.7 16.0,0.0 6.5,2.7 11.3,11.3 2.7,6.5 0.0,16.0 -2.7,6.5 -11.3,11.3 -6.5,2.7 -16.0,0.0 -6.5,-2.7 -11.3,-11.3 -2.7,-6.5" fill="#ffd34d" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" opacity="0"><set attributeName="opacity" to="1" begin="2.705s" fill="freeze"/><animate attributeName="opacity" values="1;1;0" keyTimes="0;.6;1" dur="0.5s" begin="2.705s" fill="freeze"/></polygon></g></g>
-<!-- ball -->
-<circle r="3.8" fill="#d6362f" stroke="#fff" stroke-width=".7" opacity="0" cx="135" cy="141"><set attributeName="opacity" to="1" begin="1.955s" fill="freeze"/>
-<animate attributeName="cx" values="135;236;321" keyTimes="0;.62;1" dur="0.75s" begin="1.955s" fill="freeze"/>
-<animate attributeName="cy" values="141;201;185" keyTimes="0;.62;1" calcMode="spline" keySplines=".45 0 .9 .6;.15 .5 .4 1" dur="0.75s" begin="1.955s" fill="freeze"/>
-<animate attributeName="cx" values="321;356;396" dur="0.7s" begin="2.705s" fill="freeze"/>
-<animate attributeName="cy" values="185;110;60" dur="0.7s" begin="2.705s" fill="freeze"/>
-<animate attributeName="opacity" values="1;0" dur="0.7s" begin="2.705s" fill="freeze"/></circle>
-<!-- OUT -->
-<g transform="translate(200 98) rotate(-6)"><g><animateTransform attributeName="transform" type="scale" values="0;1.35;1" keyTimes="0;.6;1" dur="0.35s" begin="2.955s" fill="freeze"/>
-<text text-anchor="middle" font-family="'Anek Bangla','Arial Black',sans-serif" font-weight="800" font-size="46" fill="#e0663a" stroke="#fff" stroke-width="6" paint-order="stroke" stroke-linejoin="round" opacity="0"><set attributeName="opacity" to="1" begin="2.955s" fill="freeze"/>আউট!</text></g></g>
-</svg><div class="spt">${E(S.name)}</div><div class="spb"><i></i></div></div><button class="sk" type="button">এড়িয়ে যান ›</button>`;
-(()=>{try{if(sessionStorage.getItem('sp')||matchMedia('(prefers-reduced-motion:reduce)').matches)return;sessionStorage.setItem('sp','1')}catch(e){}
- const d=document.createElement('div');d.id='splash';d.innerHTML=SPL;document.body.appendChild(d);
- let f=0;const end=()=>{if(f)return;f=1;d.classList.add('out');setTimeout(()=>d.remove(),700)};
- d.querySelector('.sk').onclick=end;setTimeout(end,4200)})();
+addEventListener('contextmenu',e=>{if(e.target.closest&&e.target.closest('img,button,.sl,.ms,.bn,.mx,.ach,.cm,.hd,.mn'))e.preventDefault()});addEventListener('dragstart',e=>{if(e.target.tagName==='IMG')e.preventDefault()});
 const K='fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
 const sv=(d,x)=>'<svg viewBox="0 0 24 24" '+x+'><path d="'+d+'"/></svg>';
 const I={fb:'<svg viewBox="1 0.7 24 24"><path d="M14.2 22v-8.2h2.8l.5-3.4h-3.3V8.3c0-1 .3-1.7 1.8-1.7h1.6V3.6c-.3 0-1.3-.2-2.4-.2-2.4 0-4 1.5-4 4.1v2.9H8.4v3.4h2.8V22z"/></svg>',
@@ -425,12 +353,12 @@ async function card(m){
  if(T.length){const gp=24,tw=(960-gp*(T.length-1))/T.length;T.forEach((a,k)=>{const tx=60+k*(tw+gp);rr(tx,985,tw,120,24);x.fillStyle='rgba(255,255,255,.1)';x.fill();x.strokeStyle='rgba(255,255,255,.2)';x.lineWidth=2;x.stroke();x.fillStyle='#a9c9cd';x.font=F(400,28);x.fillText(a[0],tx+tw/2,1019);let f2=40;x.font=F(700,f2);while(x.measureText(a[1]).width>tw-24&&f2>24){f2-=2;x.font=F(700,f2)}x.fillStyle='#fff';x.fillText(a[1],tx+tw/2,1068)})}
  x.fillStyle='#f4e9cc';x.font=F(600,30);x.fillText('Take small steps every day',540,1322);
  return c}
-async function give(c,m){const n=(m.n||'member').trim().replace(/\s+/g,'-')+'.png';
+async function give(c,m){if(!(usr||adm)){toast('ডাউনলোড করতে সাইন ইন করতে হবে');signIn();return}const n=(m.n||'member').trim().replace(/\s+/g,'-')+'.png';
  const b=await new Promise(r=>c.toBlob(r,'image/png'));if(!b)return toast('সেভ করা যায়নি');
  try{const f=new File([b],n,{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f]});return}}catch(e){if(e&&e.name==='AbortError')return}
  const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
 function showCard(d,c,m,i){
- d.innerHTML=`<div class="mp"><img class="cv" src="${c.toDataURL('image/png')}" alt="${E(m.n)}"><p class="hn">ছবিটি চেপে ধরেও সেভ করতে পারেন</p><div class="ac"><button class="pb g" data-b="1">← ফিরে যান</button><button class="pb o" data-s="1" style="flex:1">⬇ সেভ / শেয়ার</button></div></div>`;
+ d.innerHTML=`<div class="mp"><img class="cv" src="${c.toDataURL('image/png')}" alt="${E(m.n)}"><p class="hn">${(usr||adm)?'সেভ বা শেয়ার করতে নিচের বাটন চাপুন':'ডাউনলোড করতে সাইন ইন করতে হবে'}</p><div class="ac"><button class="pb g" data-b="1">← ফিরে যান</button><button class="pb o" data-s="1" style="flex:1">${(usr||adm)?'⬇ সেভ / শেয়ার':'🔐 সাইন ইন করে ডাউনলোড'}</button></div></div>`;
  d.onclick=e=>{const t=e.target;if(t===d)return closeMem();if(t.closest('[data-b]'))return openMem(i);if(t.closest('[data-s]'))give(c,m)}}
 const info=m=>[['ভূমিকা',m.r],['জার্সি নং',m.j],['ব্যাটিং',m.bh],['বোলিং',m.wh&&m.wh!=='নেই'?m.wh:'']].filter(x=>x[1]);
 function openMem(i){const m=(S.members||[])[i];if(!m)return;closeMem();const d=document.createElement('div');d.className='mx';d.id='md';const T=info(m);
@@ -455,7 +383,7 @@ function render(){
  const ph=S.photos.length?S.photos.map(p=>`<img src="${E(p)}" alt="">`):['#3d7d78','#e0663a','#14303b'].map(c=>`<div class="pl" style="background:${c}">ক্লাবের ছবি</div>`);
  $('#app').innerHTML=`<header class="hd"><div><button class="mb" id="mbtn" aria-label="মেনু"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><img class="lg" src="${E(S.logo)}" alt="${E(S.name)}"><div class="hn2"><b>${E(n1)}</b><small>${[...n2].map(c=>c===' '?'<i></i>':'<span>'+E(c)+'</span>').join('')}</small></div><div class="sp"></div><nav class="hnv" aria-label="মূল মেনু">${NAV.map(x=>`<a href="${x[0]}"${(location.hash||'#home')===x[0]?' class="on"':''}>${x[1]}</a>`).join('')}</nav>${A(url(S.fb),'ic ic-fb',I.fb,'Facebook')}${A(url(S.yt),'ic ic-yt',I.yt,'YouTube')}${A(S.mail?'mailto:'+S.mail:'','ic ic-ml',I.ml,'Gmail')}</div></header>
 <div class="sc" id="sc" hidden></div>
-<nav class="mn" id="mn"><div class="mh"><img src="${E(S.logo)}" alt=""><div><b>${E(n1)}</b><small>${E(n2)}</small></div></div><div class="mlk">${NAV.map(x=>`<a class="mi${(location.hash||'#home')===x[0]?' on':''}" data-a="go" href="${x[0]}"><span class="mic">${svg(x[2])}</span>${x[1]}</a>`).join('')}</div><div class="mfn"><button class="mi" data-a="dark"><span class="mic">${svg(isDark()?'sun':'moon')}</span>ডার্ক মোড: ${isDark()?'চালু':'বন্ধ'}</button>${adm?`<button class="mi" data-a="adm"><span class="mic">${svg('edit')}</span>অ্যাডমিন প্যানেল</button>`:''}<button class="mi" data-a="${adm?'out':'in'}"><span class="mic">${svg(adm?'logout':'login')}</span>${adm?'লগ আউট':'সাইন ইন'}</button></div></nav>
+<nav class="mn" id="mn"><div class="mh"><img src="${E(S.logo)}" alt=""><div><b>${E(n1)}</b><small>${E(n2)}</small></div></div><div class="mlk">${NAV.map(x=>`<a class="mi${(location.hash||'#home')===x[0]?' on':''}" data-a="go" href="${x[0]}"><span class="mic">${svg(x[2])}</span>${x[1]}</a>`).join('')}</div><div class="mfn"><button class="mi" data-a="dark"><span class="mic">${svg(isDark()?'sun':'moon')}</span>ডার্ক মোড: ${isDark()?'চালু':'বন্ধ'}</button>${adm?`<button class="mi" data-a="adm"><span class="mic">${svg('edit')}</span>অ্যাডমিন প্যানেল</button>`:''}<button class="mi" data-a="${adm||usr?'out':'in'}"><span class="mic">${svg(adm||usr?'logout':'login')}</span>${adm||usr?'লগ আউট':'সাইন ইন'}</button></div></nav>
 <main class="wrap">${V[location.hash.slice(1)]?V[location.hash.slice(1)]():`
 <section class="bn">${b.img?`<img src="${E(b.img)}" alt="">`:ART}<div class="bt">${b.t?`<b>${E(b.t)}</b>`:''}${b.s?`<span>${E(b.s)}</span>`:''}<div class="cta"><a class="p" href="#events">ইভেন্ট দেখুন</a><a class="s" href="#members">আমাদের সদস্য</a></div></div></section>
 <section><h2 class="sh">আমাদের বিভাগ</h2><div class="gr">${S.tiles.map(t=>A(url(t.u||ROUTE[t.t]),'tl',`<span class="ti">${tIcon(t.i)}</span><em>${E(t.t)}</em>`,t.t)).join('')}</div></section>
@@ -614,17 +542,17 @@ function initStats(){if(so)so.disconnect();cancelAnimationFrame(raf);const el=$(
  so=new IntersectionObserver(([e])=>{cancelAnimationFrame(raf);
   if(e.isIntersecting){const t0=performance.now(),f=t=>{const k=Math.min(1,(t-t0)/1600);set(1-Math.pow(1-k,3));if(k<1)raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f)}else set(0)},{threshold:.6});
  so.observe(el)}
+const IN_APP=/FBAN|FBAV|FB_IAB|Messenger|Instagram|Line\/|Snapchat|MicroMessenger|; wv\)/i.test(navigator.userAgent);
 function signIn(){closeMem();const d=document.createElement('div');d.className='mx';d.id='md';
- d.innerHTML='<div class="mp" style="padding:24px;text-align:center"><h3 style="margin:0 0 6px;font-size:22px">অ্যাডমিন সাইন ইন</h3><p style="margin:0 0 18px;color:var(--mut);font-size:14px">শুধু অ্যাডমিনের Google অ্যাকাউন্ট দিয়ে সাইন ইন করা যাবে</p><button class="pb" data-g="1" style="width:100%;padding:13px;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1.5px solid #dadce0"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Google দিয়ে সাইন ইন</button><button class="pb g" data-b="1" style="width:100%;margin-top:10px">বন্ধ</button></div>';
+ d.innerHTML='<div class="mp" style="padding:24px;text-align:center"><h3 style="margin:0 0 6px;font-size:22px">সাইন ইন</h3><p style="margin:0 0 18px;color:var(--mut);font-size:14px">Google অ্যাকাউন্ট দিয়ে সাইন ইন করলে ফটোকার্ড ডাউনলোড করতে পারবেন</p>'+(IN_APP?'<p class="wn">⚠️ আপনি অ্যাপের ভেতরের ব্রাউজারে (যেমন Facebook/Messenger) আছেন। Google এখানে সাইন ইন করতে দেয় না। ⋮ মেনু চেপে "Chrome-এ খুলুন" বেছে নিয়ে সাইটটি আবার খুলুন।</p>':'')+'<button class="pb" data-g="1" style="width:100%;padding:13px;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f1f1f;border:1.5px solid #dadce0"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Google দিয়ে সাইন ইন</button><p class="er" id="le" role="alert"></p><button class="pb g" data-b="1" style="width:100%;margin-top:10px">বন্ধ</button></div>';
  d.onclick=async e=>{const t=e.target;if(t===d||t.closest('[data-b]'))return closeMem();
-  if(t.closest('[data-g]')){const p=new GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});
-   try{const r=await signInWithPopup(auth,p);bump('signins');closeMem();toast('সাইন ইন হয়েছে');if(ADMINS.includes((r.user.email||'').toLowerCase()))openAd()}
-   catch(x){const c=x&&x.code;
-    if(c==='auth/popup-blocked'||c==='auth/operation-not-supported-in-this-environment')return signInWithRedirect(auth,p);
-    if(c==='auth/popup-closed-by-user'||c==='auth/cancelled-popup-request')return;
-    toast(c==='auth/unauthorized-domain'?'এই সাইটের ডোমেইন Firebase → Authentication → Settings → Authorized domains-এ যোগ করুন':c==='auth/operation-not-allowed'?'Firebase-এ Google সাইন-ইন চালু করুন':'সাইন ইন হয়নি ('+(c||'error')+')')}}};
+  const bt=t.closest('[data-g]');if(bt){const le=$('#le');le.textContent='';bt.disabled=true;const p=new GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});
+   try{const r=await signInWithPopup(auth,p),em=(r.user.email||'').toLowerCase(),ad=ADMINS.includes(em);usr=r.user;adm=ad;bump('signins');closeMem();toast('সাইন ইন হয়েছে: '+em+(ad?'':' (অ্যাডমিন নয়)'));if(ad)openAd()}
+   catch(x){bt.disabled=false;const c=(x&&x.code)||'error',env='এই ব্রাউজারে সাইন ইন চলে না। সাইটটি Chrome-এ খুলুন।';
+    const M={'auth/popup-blocked':'পপআপ ব্লক হয়েছে। ব্রাউজারের ঠিকানার পাশে পপআপ "অনুমতি দিন" করে আবার চাপুন, অথবা সাইটটি Chrome-এ খুলুন।','auth/popup-closed-by-user':'সাইন ইন সম্পূর্ণ হয়নি (পপআপ বন্ধ হয়েছে)। আবার চেষ্টা করুন।','auth/cancelled-popup-request':'আগের সাইন ইন চলছে, একটু অপেক্ষা করে আবার চাপুন।','auth/unauthorized-domain':'এই সাইটের ডোমেইন ('+location.hostname+') Firebase → Authentication → Settings → Authorized domains-এ যোগ করুন।','auth/operation-not-allowed':'Firebase → Authentication → Sign-in method-এ Google চালু করুন।','auth/network-request-failed':'ইন্টারনেট সংযোগ দেখুন।','auth/operation-not-supported-in-this-environment':env,'auth/web-storage-unsupported':env,'auth/api-key-not-valid.-please-pass-a-valid-api-key.':'firebaseConfig-এর apiKey ভুল।'};
+    le.textContent=(M[c]||'সাইন ইন হয়নি।')+' ['+c+']'}}};
  document.body.appendChild(d)}
-onAuthStateChanged(auth,u=>{adm=!!u&&ADMINS.includes((u.email||'').toLowerCase());render()});
+onAuthStateChanged(auth,u=>{usr=u||null;adm=!!u&&ADMINS.includes((u.email||'').toLowerCase());render()});
 getRedirectResult(auth).then(r=>{if(r)bump('signins')}).catch(()=>{});
 render();countView().then(load).then(render);
 
